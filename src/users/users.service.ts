@@ -65,9 +65,9 @@ export class UsersService {
     }
   }
 
-  async createUser(newUser: UserInput) {
+  async createUser(userFromClient: UserInput) {
     try {
-      const user = new this.userModel(newUser);
+      const user = new this.userModel(userFromClient);
       await user.save();
       return user;
     } catch (error) {

@@ -11,6 +11,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { RedisModule } from './redis/redis.module';
+import { cyan } from 'chalk';
 
 @Module({
   imports: [
@@ -24,13 +25,13 @@ import { RedisModule } from './redis/redis.module';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       autoSchemaFile: 'schema.gql',
     }),
-    MongooseModule.forRootAsync({
-      useFactory: () => {
-        const mongooseOptions = { uri: 'mongodb://localhost/my_data' };
-        mongoose.connection.on('connection', () => {
-          console.log('Connected to MongoDB');
+    MongooseModule.forRoot('mongodb://127.0.0.1/my_data', {
+      connectionFactory: (connection) => {
+        connection.on('connected', () => {
+          console.log(cyan('mongodb connected successfully!!!'));
         });
-        return mongooseOptions;
+        connection._events.connected();
+        return connection;
       },
     }),
     TypeOrmModule.forRoot({
@@ -55,3 +56,13 @@ export class AppModule implements NestModule {
     // consumer.apply(LoggerMiddleware).forRoutes('');
   }
 }
+
+// {
+//   useFactory: () => {
+//     const mongooseOptions = { uri: 'mongodb://localhost/my_data' };
+//     mongoose.connection.on('connection', () => {
+//       console.log('Connected to MongoDB');
+//     });
+//     return mongooseOptions;
+//   },
+// }

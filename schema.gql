@@ -29,7 +29,7 @@ input NewUserInput {
   name: NameInput!
   email: String!
   password: String!
-  isAdmin: Boolean!
+  isAdmin: Boolean
 }
 
 input NameInput {

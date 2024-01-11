@@ -1,4 +1,4 @@
-import { BeltGuard } from './belt.guard';
+import { BeltGuard } from './auth.guard';
 
 describe('BeltGuard', () => {
   it('should be defined', () => {

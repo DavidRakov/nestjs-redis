@@ -12,6 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { RedisModule } from './redis/redis.module';
 import { cyan } from 'chalk';
+import { UserEntity } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -34,17 +35,17 @@ import { cyan } from 'chalk';
         return connection;
       },
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      password: 'mnhm4954',
-      username: 'postgres',
-      autoLoadEntities: true,
-      database: 'postgres',
-      synchronize: true,
-      logging: true,
-    }),
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: 'localhost',
+    //   port: 5432,
+    //   password: 'mnhm4954',
+    //   username: 'postgres',
+    //   entities: [UserEntity],
+    //   database: 'postgres',
+    //   synchronize: true,
+    //   logging: true,
+    // }),
     ConfigModule.forRoot({ isGlobal: true }),
     RedisModule,
   ],

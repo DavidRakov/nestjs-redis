@@ -41,9 +41,8 @@ export class NewUserInput {
   @Field()
   password: string;
 
-  @IsNotEmpty()
   @IsBoolean()
-  @Field()
+  @Field({ nullable: true })
   isAdmin: boolean;
 }
 

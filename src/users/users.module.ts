@@ -3,6 +3,8 @@ import { UsersResolvers } from './users.resolver';
 import { UsersService } from './users.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from './entities/user.entity';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { User, UserSchema } from './schemas/user.schema';
         },
       },
     ]),
+    // TypeOrmModule.forFeature([UserEntity]),
   ],
   providers: [UsersService, UsersResolvers],
 })

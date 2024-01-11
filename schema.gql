@@ -2,38 +2,39 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserDto {
+type Name {
+  firstName: String!
+  lastName: String!
+}
+
+type UserType {
   _id: ID!
-  userId: Float!
-  name: String!
+  name: Name!
   email: String!
+  password: String!
+  isAdmin: Boolean!
 }
 
 type Query {
-  getUsers: [UserDto!]!
-  getUser(id: String!): UserDto!
+  getUsers: [UserType!]!
+  getUser(id: String!): UserType!
 }
 
 type Mutation {
-  addUser(input: UserInput!): UserDto!
-  updateUser(input: UpdateUserInput!): UserDto!
+  addUser(input: NewUserInput!): UserType!
   deleteUser(id: Float!): String!
 }
 
-input UserInput {
-  userId: Float!
-  name: String!
+input NewUserInput {
+  name: NameInput!
   email: String!
+  password: String!
+  isAdmin: Boolean!
 }
 
-input UpdateUserInput {
-  userId: Float!
-  newInput: Input!
-}
-
-input Input {
-  name: String!
-  email: String!
+input NameInput {
+  firstName: String!
+  lastName: String!
 }
 
 type Subscription {

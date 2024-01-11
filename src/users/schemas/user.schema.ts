@@ -4,15 +4,27 @@ import { HydratedDocument } from 'mongoose';
 export type UserDocument = HydratedDocument<User>;
 
 @Schema()
-export class User {
+export class Name {
   @Prop()
-  userId: number;
+  firstName: string;
 
   @Prop()
-  name: string;
+  lastName: string;
+}
+
+@Schema()
+export class User {
+  @Prop()
+  name: Name;
 
   @Prop()
   email: string;
+
+  @Prop({ required: true })
+  password: string;
+
+  @Prop()
+  isAdmin: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -1,4 +1,5 @@
 import { Global, Module } from '@nestjs/common';
+import { gray } from 'chalk';
 import * as Redis from 'redis';
 
 @Global()
@@ -9,7 +10,7 @@ import * as Redis from 'redis';
       useFactory: async () => {
         const client = Redis.createClient();
         await client.connect();
-        console.log('connect to redis');
+        console.log(gray('connect to redis'));
         return client;
       },
     },

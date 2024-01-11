@@ -2,7 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
-import { UserInput } from './inputs/users.input';
+import { NewUserInput } from './inputs/users.input';
 import { UpdateUserDto } from './dto/update-user.dto/update-user.dto';
 import { RedisJSON } from '@redis/json/dist/commands';
 import { RedisClientType } from 'redis';
@@ -65,7 +65,7 @@ export class UsersService {
     }
   }
 
-  async createUser(userFromClient: UserInput) {
+  async createUser(userFromClient: NewUserInput) {
     try {
       const user = new this.userModel(userFromClient);
       await user.save();
@@ -75,14 +75,14 @@ export class UsersService {
     }
   }
 
-  async updateUser(userId: number, userDetails: UpdateUserDto) {
-    const updatedUser = await this.userModel.findOneAndUpdate(
-      { userId },
-      userDetails,
-      { returnDocument: 'after' },
-    );
-    return updatedUser;
-  }
+  // async updateUser(userId: number, userDetails: UpdateUserDto) {
+  //   const updatedUser = await this.userModel.findOneAndUpdate(
+  //     { userId },
+  //     userDetails,
+  //     { returnDocument: 'after' },
+  //   );
+  //   return updatedUser;
+  // }
 
   async deleteUser(userId: number) {
     return await this.userModel.findOneAndDelete({ userId });

@@ -1,19 +1,28 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { IsEmail, MinLength } from 'class-validator';
 
 @ObjectType()
-export class UserDto {
+export class Name {
+  @Field()
+  firstName: string;
+
+  @Field()
+  lastName: string;
+}
+
+@ObjectType()
+export class UserType {
   @Field(() => ID)
   _id: string;
 
   @Field()
-  readonly userId: number;
+  name: Name;
 
   @Field()
-  @MinLength(4)
-  readonly name: string;
+  email: string;
 
   @Field()
-  @IsEmail()
-  readonly email: string;
+  password: string;
+
+  @Field()
+  isAdmin: boolean;
 }

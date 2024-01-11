@@ -40,7 +40,7 @@ import { cyan } from 'chalk';
       port: 5432,
       password: 'mnhm4954',
       username: 'postgres',
-      entities: [],
+      autoLoadEntities: true,
       database: 'postgres',
       synchronize: true,
       logging: true,
@@ -56,13 +56,3 @@ export class AppModule implements NestModule {
     // consumer.apply(LoggerMiddleware).forRoutes('');
   }
 }
-
-// {
-//   useFactory: () => {
-//     const mongooseOptions = { uri: 'mongodb://localhost/my_data' };
-//     mongoose.connection.on('connection', () => {
-//       console.log('Connected to MongoDB');
-//     });
-//     return mongooseOptions;
-//   },
-// }
